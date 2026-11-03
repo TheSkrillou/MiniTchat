@@ -1,22 +1,31 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #eef2f5; /* Un gris-bleu très léger pour le fond général */
     margin: 30px;
     color: #333;
 }
 
+p {
+    width: 60%;
+    margin: 12px auto;
+    text-align: center;
+    line-height: 1.5;
+}
+
 form, div {
-    background: #ffffff;
-    border: 1px solid #ccc;
+    background: #ffffff; /* Fond blanc bien net */
+    border: 1px solid #d1d5db; /* Bordure discrète */
+    border-radius: 6px; /* Coins légèrement arrondis */
     width: 60%;
     margin: 20px auto;
     padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Légère ombre moderne */
 }
 
 .info {
     text-align: center;
     font-weight: bold;
-    color: #333;
+    color: #4b5563; /* Gris foncé élégant pour les titres */
 }
 
 table {
@@ -24,11 +33,11 @@ table {
 }
 
 .date {
-    color: #00267e;
+    color: #1d4ed8; /* Bleu un peu plus moderne */
     font-weight: bold;
 }
 
 .heure {
-    color: #00650e;
+    color: #047857; /* Vert un peu plus moderne */
     font-weight: bold;
 }

@@ -22,10 +22,10 @@ session_start();
     </form>
 
     <?php
-        $reponse = $bdd->query('SELECT messages_pseudo, messages_contenu, DATE_FORMAT(messages_dateM, \'%d/%m/%Y %H:%i\') AS date FROM messages ORDER BY messages_dateM DESC LIMIT 10');
+        $reponse = $bdd->query('SELECT messages_pseudo, messages_contenu, DATE_FORMAT(messages_dateM, \'%d/%m/%Y\') AS date, DATE_FORMAT(messages_dateM, \'%H:%i\') AS heure FROM messages ORDER BY messages_dateM DESC LIMIT 10'); 
 
         while ($donnees = $reponse->fetch()) {
-            echo '<p><strong>' . htmlspecialchars($donnees['messages_pseudo']) . '</strong> <em>(' . $donnees['date'] . ')</em> : ' . htmlspecialchars($donnees['messages_contenu']) . '</p>';
+            echo '<p>Le <span class="date">' . $donnees['date'] . '</span> à <span class="heure">' . $donnees['heure'] . '</span> - <strong>' . htmlspecialchars($donnees['messages_pseudo']) . '</strong> : ' . htmlspecialchars($donnees['messages_contenu']) . '</p>';
         }
         $reponse->closeCursor();
     ?>
