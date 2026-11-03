@@ -11,7 +11,15 @@ session_start();
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
+    <form action="" method="get" class="form-limite">
+        <label>Combien de messages ?</label>
+        <select name="limite">
+            <option value="5" <?php if(isset($_GET['limite']) && $_GET['limite'] == 5) echo 'selected'; ?>>5</option>
+            <option value="10" <?php if(isset($_GET['limite']) && $_GET['limite'] == 10) echo 'selected'; ?>>10</option>
+            <option value="20" <?php if(isset($_GET['limite']) && $_GET['limite'] == 20) echo 'selected'; ?>>20</option>
+        </select>
+        <input type="submit" value="Afficher">
+    </form>
     <form action="traitement.php" method="post">
         <p class="info">Laissez un message</p>
         <p>
@@ -27,15 +35,7 @@ session_start();
         </p>
     </form>
 
-    <form action="" method="get" class="form-limite">
-        <label>Combien de messages ?</label>
-        <select name="limite">
-            <option value="5" <?php if(isset($_GET['limite']) && $_GET['limite'] == 5) echo 'selected'; ?>>5</option>
-            <option value="10" <?php if(isset($_GET['limite']) && $_GET['limite'] == 10) echo 'selected'; ?>>10</option>
-            <option value="20" <?php if(isset($_GET['limite']) && $_GET['limite'] == 20) echo 'selected'; ?>>20</option>
-        </select>
-        <input type="submit" value="Afficher">
-    </form>
+    
    <div>
         <?php
         $limite = 5;
