@@ -20,6 +20,7 @@ session_start();
         </select>
         <input type="submit" value="Afficher">
     </form>
+
     <form action="traitement.php" method="post">
         <p class="info">Laissez un message</p>
         <p>
@@ -35,7 +36,6 @@ session_start();
         </p>
     </form>
 
-    
    <div>
         <?php
         $limite = 5;
@@ -43,15 +43,15 @@ session_start();
             $limite = (int) $_GET['limite'];
         }
 
-        $reponse = $bdd->query('SELECT messages_id, messages_pseudo, messages_contenu, DATE_FORMAT(messages_dateM, \'%d/%m/%Y à %H:%i\') AS date, DATE_FORMAT(messages_dateModif, \'%d/%m/%Y à %H:%i\') AS dateModif FROM messages ORDER BY messages_dateM DESC LIMIT ' . $limite);
-        
-       while ($donnees = $reponse->fetch()) {
+        // Requête corrigée avec AS date, AS heure et la sélection de messages_dateM
+        $reponse = $bdd->query('SELECT messages_dateM, messages_pseudo, messages_contenu, DATE_FORMAT(messages_dateM, \'%d/%m/%Y\') AS date, DATE_FORMAT(messages_dateM, \'%H:%i\') AS heure FROM messages ORDER BY messages_dateM DESC LIMIT ' . $limite); 
+
+        while ($donnees = $reponse->fetch()) {
             echo '<p>';
             echo 'Le <span class="date">' . $donnees['date'] . '</span> à <span class="heure">' . $donnees['heure'] . '</span>';
-            
             echo ' - <strong>' . htmlspecialchars($donnees['messages_pseudo']) . '</strong> : ' . htmlspecialchars($donnees['messages_contenu']);
             
-            // On utilise la date brute stockée en base (messages_dateM) pour identifier le message
+            // Liens de modification et de suppression fonctionnels avec la date
             echo ' <a href="modifier.php?date=' . urlencode($donnees['messages_dateM']) . '">[Modifier]</a>';
             echo ' <a href="supprimer.php?date=' . urlencode($donnees['messages_dateM']) . '" onclick="return confirm(\'Voulez-vous vraiment supprimer ce message ?\');">[Supprimer]</a>';
             
