@@ -20,7 +20,7 @@ MiniTchat est un projet de minichat développé en PHP procédural et MySQL dans
 ## Accès au projet
 
 Le projet est en ligne et accessible à l'adresse suivante :
-[MiniTchat sur le serveur étudiant](https://www.info.unicaen.fr/~navarro251/R3.01-MiniChat/)
+(https://dev-navarro251.users.info.unicaen.fr/R3.01-MiniTchat)
 
 ## Auteur
 
