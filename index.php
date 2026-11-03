@@ -43,19 +43,17 @@ session_start();
             $limite = (int) $_GET['limite'];
         }
 
-$reponse = $bdd->query('SELECT messages_id, messages_pseudo, messages_contenu, DATE_FORMAT(messages_dateM, \'%d/%m/%Y à %H:%i\') AS date, DATE_FORMAT(messages_dateModif, \'%d/%m/%Y à %H:%i\') AS dateModif FROM messages ORDER BY messages_dateM DESC LIMIT ' . $limite);
-        while ($donnees = $reponse->fetch()) {
+        $reponse = $bdd->query('SELECT messages_id, messages_pseudo, messages_contenu, DATE_FORMAT(messages_dateM, \'%d/%m/%Y à %H:%i\') AS date, DATE_FORMAT(messages_dateModif, \'%d/%m/%Y à %H:%i\') AS dateModif FROM messages ORDER BY messages_dateM DESC LIMIT ' . $limite);
+        
+       while ($donnees = $reponse->fetch()) {
             echo '<p>';
             echo 'Le <span class="date">' . $donnees['date'] . '</span> à <span class="heure">' . $donnees['heure'] . '</span>';
             
-            if (!empty($donnees['messages_dateModif'])) {
-                echo ' (Modifié le ' . $donnees['dateModif'] . ')';
-            }
-
             echo ' - <strong>' . htmlspecialchars($donnees['messages_pseudo']) . '</strong> : ' . htmlspecialchars($donnees['messages_contenu']);
             
-            echo ' <a href="modifier.php?id=' . $donnees['messages_id'] . '">[Modifier]</a>';
-            echo ' <a href="supprimer.php?id=' . $donnees['messages_id'] . '" onclick="return confirm(\'Voulez-vous vraiment supprimer ce message ?\');">[Supprimer]</a>';
+            // On utilise la date brute stockée en base (messages_dateM) pour identifier le message
+            echo ' <a href="modifier.php?date=' . urlencode($donnees['messages_dateM']) . '">[Modifier]</a>';
+            echo ' <a href="supprimer.php?date=' . urlencode($donnees['messages_dateM']) . '" onclick="return confirm(\'Voulez-vous vraiment supprimer ce message ?\');">[Supprimer]</a>';
             
             echo '</p>';
         }
